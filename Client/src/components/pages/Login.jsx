@@ -5,7 +5,7 @@ export const Login = () => {
     <>
       <p>Login page</p>
       <button>
-        <Link to="/Dashboard">DashBoard</Link>
+        <Link to="/adminpage">Adminpage</Link>
       </button>
     </>
   );

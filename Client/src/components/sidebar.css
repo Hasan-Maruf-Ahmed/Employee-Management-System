@@ -1,0 +1,113 @@
+*{
+    /* border: 1px solid red; */
+}
+
+.sideBar {
+    /* position: absolute; */
+    
+    width: 60px;
+    height: 100vh;
+    overflow: hidden;
+    transition: 0.5s;
+    box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.2);
+}
+
+.sideBar:hover {
+    width: 300px;
+}
+
+.sideBar ul {
+    /* position: relative; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.sideBar ul li {
+    list-style: none;
+    border-radius: 5px;
+}
+
+.sideBar ul li:hover {
+    background-color: #009e89e5;
+}
+.sideBar ul li a {
+    /* position: relative; */
+    display: flex;
+    /* white-space: nowrap; */
+    text-decoration: none;
+}
+.sideBar ul li a .icon {
+    /* position: relative; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 60px;
+    height: 60px;
+    font-size: 1.5em;
+    color: #333;
+}
+.sideBar ul li a .text {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.logo{
+    display: flex;
+    text-decoration: none;
+}
+.adminlogo .icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 60px;
+    height: 60px;
+    font-size: 1.5em;
+    color: #333;
+}
+.adminlogo .text{
+    height: 60px;
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.sideBar ul li.logo {
+    margin-top: 30px;
+}
+.sideBar ul li.logo:hover {
+    background-color: #fff;
+}
+.sideBar ul li.logo .icon{
+    font-size: 2em;
+}
+.sideBar ul li.logo .text{
+    font-size: 1.2em;
+    font-weight: 500;
+}
+.bottom {
+    /* position: absolute; */
+    bottom: 0;
+    width: 100%;
+}
+.bottom .imgBx
+{
+    /* position: relative; */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.bottom .imgBx img {
+    /* position: absolute; */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
