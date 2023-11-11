@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
 
 const Schema = mongoose.Schema;
 
@@ -19,4 +20,12 @@ const userSchema = new Schema({
     }
 });
 
+userSchema.methods.generateAuthToken = function () {
+    const token = jwt.sign({_id: this._id}, process.env.JWTPRIVATEKEY, {
+        expiresIn: "1d",
+    })
+}
+
 const User = mongoose.model('User', userSchema);
+
+module.exports = User;
