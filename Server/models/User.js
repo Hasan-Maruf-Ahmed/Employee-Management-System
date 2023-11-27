@@ -26,7 +26,12 @@ const userSchema = new Schema({
 });
 
 userSchema.methods.generateAuthToken = function () {
-    const token = jwt.sign({_id: this._id}, process.env.JWTPRIVATEKEY, {
+    const token = jwt.sign({
+        _id: this._id,
+        username: this.username,
+        email: this.email,
+        role: this.role
+    }, process.env.JWTPRIVATEKEY, {
         expiresIn: "1d",
     })
 
