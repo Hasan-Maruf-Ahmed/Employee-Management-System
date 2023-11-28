@@ -16,8 +16,8 @@ app.use(cors());
 
 app.use("/api/login", loginRoute);
 app.use("/api/register", registerRoute);
-app.use("/api/admin", testRoute);
-app.use("/api/addDetails", employeeDetailsRoute);
+// app.use("/api/admin", testRoute);
+app.use("/api", employeeDetailsRoute);
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
