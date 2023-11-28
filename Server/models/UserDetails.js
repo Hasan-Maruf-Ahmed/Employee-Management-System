@@ -57,7 +57,7 @@ const userDetailsSchema = new Schema({
             type: String,
             required: true,
         },
-        graduation: {
+        graduationyear: {
             type: Number,
             required: true,
         }
