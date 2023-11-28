@@ -32,7 +32,7 @@ userSchema.methods.generateAuthToken = function () {
         email: this.email,
         role: this.role
     }, process.env.JWTPRIVATEKEY, {
-        expiresIn: "1d",
+        expiresIn: "1h",
     })
 
     return token;

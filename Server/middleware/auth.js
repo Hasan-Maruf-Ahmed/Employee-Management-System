@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const auth = (req, res,next) => {
-    const token = req.header('x-auth-token');
+    const token = req.header('Authorization');
 
     if(!token) {
         return res.status(401).send({ matchMedia: "Access denied. No token provided." });
@@ -13,7 +13,7 @@ const auth = (req, res,next) => {
         next();
     }
     catch(err) {
-        res.status(401).send({ message: 'Invalid token.' });
+        res.status(401).send({ message: 'Invalid token.', error: err.message });
     }
 }
 
