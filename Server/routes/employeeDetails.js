@@ -1,10 +1,11 @@
 const router = require('express').Router();
 const UserDetails = require('../models/UserDetails');
+const auth = require('../middleware/auth');
 
 //Get all employee data
 router.get('/getAll', async (req, res) => {
     try {
-        const allEmployees = await UserDetails.find();
+        const allEmployees = await UserDetails.find().populate("user", "username email role -_id");
         res.status(200).json(allEmployees);
     } catch (err) {
         res.status(500).send({ message: 'Internal Server Error', error: err.message });
@@ -27,15 +28,15 @@ router.get('/:id', async (req, res) => {
 });
 
 //Add a new employee
-router.post('/addDetails', async (req, res) => {
+router.post('/addDetails', auth, async (req, res) => {
     try {
-        const userDetails= new UserDetails(req.body);
+        const userDetails= new UserDetails({...req.body, user: req.user._id});
         await userDetails.save();
         res.status(200).send({message: 'Details added successfully'});
     } catch (err) {
         res.status(500).send({message: "Internal Server Error", error: err.message });
     }
-})
+});
 
 //Update an employee details
 router.patch('/:id', async (req, res) => {
