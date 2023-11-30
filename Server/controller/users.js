@@ -4,7 +4,7 @@ const User = require('../models/User');
 //get all user details
 const getDetails = async (req, res) => {
     try {
-        const allEmployees = await UserDetails.find().populate("user", "username email role -_id");
+        const allEmployees = await User.find().populate("userDetails", "-_id -__v");
         res.status(200).json(allEmployees);
     } catch (err) {
         res.status(500).send({ message: 'Internal Server Error', error: err.message });
@@ -14,7 +14,7 @@ const getDetails = async (req, res) => {
 const getDetailsById = async (req, res) => {
     try {
         // const employee = await UserDetails.findById(req.params.id);
-        const employee = await UserDetails.findOne({ id: req.params.id });
+        const employee = await UserDetails.findOne({ id: req.params.id }).populate("user", "username email role -_id");
 
         if(!employee) {
             return res.status(404).send({ message: 'Employee not found' });
@@ -62,16 +62,28 @@ const updateDetails = async (req, res) => {
 //delete by ID
 const deleteUser = async (req, res) => {
     try {
-        const deletedEmployee = await UserDetails.findOneAndDelete({ id: req.params.id });
+        const deletedEmployee = await User.findById(req.params.id).populate("userDetails");
 
         if (!deletedEmployee) {
             return res.status(404).send({ message: 'Employee not found' });
         }
 
-        res.status(200).json({ message: 'Employee deleted successfully' });
+        // Check if user details are populated
+        if (!deletedEmployee.userDetails) {
+            return res.status(404).send({ message: 'User details not found for the employee' });
+        }
+
+        // Delete the associated UserDetails
+        await UserDetails.findByIdAndDelete(deletedEmployee.userDetails);
+
+        // Delete the employee
+        await User.findByIdAndDelete(req.params.id);
+
+        res.status(200).json({ message: 'Employee and associated details deleted successfully' });
     } catch (err) {
-        res.status(500).send({message: "Internal Server Error", error: err.message });
+        res.status(500).send({ message: 'Internal Server Error', error: err.message });
     }
-}
+};
+
 
 module.exports = { getDetails, getDetailsById, addDetails, updateDetails, deleteUser };

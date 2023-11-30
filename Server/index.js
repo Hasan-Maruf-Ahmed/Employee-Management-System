@@ -7,7 +7,6 @@ const loginRoute = require("./routes/login");
 const registerRoute = require("./routes/register");
 const adminServicesRoute = require("./routes/adminServices");
 const employeeServicesRoute = require("./routes/employeeServices");
-const testRoute = require("./routes/test");
 
 connection();
 
