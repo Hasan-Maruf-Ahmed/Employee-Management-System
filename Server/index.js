@@ -5,7 +5,8 @@ const cors = require("cors");
 const connection = require("./db");
 const loginRoute = require("./routes/login");
 const registerRoute = require("./routes/register");
-const employeeDetailsRoute = require("./routes/employeeDetails");
+const adminServicesRoute = require("./routes/adminServices");
+const employeeServicesRoute = require("./routes/employeeServices");
 const testRoute = require("./routes/test");
 
 connection();
@@ -16,8 +17,8 @@ app.use(cors());
 
 app.use("/api/login", loginRoute);
 app.use("/api/register", registerRoute);
-// app.use("/api/admin", testRoute);
-app.use("/api", employeeDetailsRoute);
+app.use("/api/admin", adminServicesRoute);
+app.use("/api", employeeServicesRoute);
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => {

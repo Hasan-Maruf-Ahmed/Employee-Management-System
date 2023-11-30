@@ -10,6 +10,7 @@ const userDetailsSchema = new Schema({
     id: {
         type: String,
         required: true,
+        unique: true
     },
     firstname: {
         type: String,

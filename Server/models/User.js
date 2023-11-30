@@ -22,6 +22,10 @@ const userSchema = new Schema({
         type: [String],
         enum: ['employee', 'admin'],
         default: ['employee'],
+    },
+    userDetails: {
+        type: mongoose.Types.ObjectId,
+        ref: 'UserDetails'
     }
 });
 

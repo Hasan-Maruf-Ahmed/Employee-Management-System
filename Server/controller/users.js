@@ -1,19 +1,17 @@
-const router = require('express').Router();
 const UserDetails = require('../models/UserDetails');
-const auth = require('../middleware/auth');
+const User = require('../models/User');
 
-//Get all employee data
-router.get('/getAll', async (req, res) => {
+//get all user details
+const getDetails = async (req, res) => {
     try {
         const allEmployees = await UserDetails.find().populate("user", "username email role -_id");
         res.status(200).json(allEmployees);
     } catch (err) {
         res.status(500).send({ message: 'Internal Server Error', error: err.message });
     }
-});
-
-//Get a employee
-router.get('/:id', async (req, res) => {
+}
+//get by ID
+const getDetailsById = async (req, res) => {
     try {
         // const employee = await UserDetails.findById(req.params.id);
         const employee = await UserDetails.findOne({ id: req.params.id });
@@ -25,21 +23,26 @@ router.get('/:id', async (req, res) => {
     } catch (err) {
         res.status(500).send({ message: 'Internal Server Error', error: err.message });
     } 
-});
+}
 
-//Add a new employee
-router.post('/addDetails', auth, async (req, res) => {
+//add details
+const addDetails = async (req, res) => {
     try {
         const userDetails= new UserDetails({...req.body, user: req.user._id});
         await userDetails.save();
+        await User.updateOne({
+            _id: req.user._id,
+        }, {
+            userDetails: userDetails._id
+        })
         res.status(200).send({message: 'Details added successfully'});
     } catch (err) {
         res.status(500).send({message: "Internal Server Error", error: err.message });
     }
-});
+}
 
-//Update an employee details
-router.patch('/:id', async (req, res) => {
+//update by ID
+const updateDetails = async (req, res) => {
     try {
         const updatedEmployee = await UserDetails.findOneAndUpdate(
             { id: req.params.id},
@@ -54,10 +57,10 @@ router.patch('/:id', async (req, res) => {
     } catch (err) {
         res.status(500).send({message: "Internal Server Error", error: err.message });
     }
-});
+}
 
-//Delete an employee 
-router.delete('/:id', async (req, res) => {
+//delete by ID
+const deleteUser = async (req, res) => {
     try {
         const deletedEmployee = await UserDetails.findOneAndDelete({ id: req.params.id });
 
@@ -69,8 +72,6 @@ router.delete('/:id', async (req, res) => {
     } catch (err) {
         res.status(500).send({message: "Internal Server Error", error: err.message });
     }
-});
+}
 
-
-
-module.exports = router;
+module.exports = { getDetails, getDetailsById, addDetails, updateDetails, deleteUser };

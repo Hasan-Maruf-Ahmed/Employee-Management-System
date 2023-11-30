@@ -4,7 +4,7 @@ const auth = (req, res,next) => {
     const token = req.header('Authorization');
 
     if(!token) {
-        return res.status(401).send({ matchMedia: "Access denied. No token provided." });
+        return res.status(401).send({ message: "Access denied. You're not Authorized." });
     }
 
     try {
