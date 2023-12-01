@@ -1,9 +1,16 @@
 import { NavLink } from "react-router-dom";
+import { useLogout } from "../hooks/useLogout";
+import { useAuthContext } from "../hooks/useAuthContext";
 
-import user from "../assets/IMG_20230312_134619.jpg";
+import userdp from "../assets/IMG_20230312_134619.jpg";
 import "./sidebar.css";
 
 export const SideBar = () => {
+  const { logout } = useLogout();
+  const { user }= useAuthContext();
+  const handleClick = () => {
+    logout();
+  }
   return (
     <>
       <nav className="sideBar">
@@ -55,18 +62,20 @@ export const SideBar = () => {
               <NavLink>
                 <span className="icon">
                   <div className="imgBx">
-                    <img src={user} alt="" />
+                    <img src={userdp} alt="" />
                   </div>
                 </span>
-                <span className="text">Logout</span>
+                {user && (<span className="text">{user.username}</span>)}
               </NavLink>
             </li>
             <li>
               <NavLink>
-                <span className="icon">
-                  <ion-icon name="log-out-outline"></ion-icon>
-                </span>
-                <span className="text">Logout</span>
+                <button className="logout-btn" onClick={handleClick}>
+                  <span className="icon">
+                    <ion-icon name="log-out-outline"></ion-icon>
+                  </span>
+                  <span className="text">Logout</span>
+                </button>
               </NavLink>
             </li>
           </div>

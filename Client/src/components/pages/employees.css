@@ -47,3 +47,19 @@
     transform: scale(1.04);
     background-color: rgb(33, 187, 148);
   }
+
+  .error {
+    color: #721c24; /* Dark red color for text */
+    background-color: #f8d7da; /* Light red background color */
+    border: 1px solid #f5c6cb; /* Border color */
+    padding: 0.75rem 1.25rem; /* Padding for better spacing */
+    margin-top: 10px; /* Margin from the top to separate from other elements */
+    border-radius: 0.25rem; /* Rounded corners for a nicer look */
+    display: inline-block; /* Display as an inline block to fit content width */
+    transition: opacity 0.5s ease; /* Fade effect for hiding the error */
+  }
+  .error.hidden {
+    height: 50px;
+    opacity: 0; /* Set opacity to 0 to hide the error */
+    transition: opacity 0.5s ease; /* Apply the same transition for hiding */
+  }

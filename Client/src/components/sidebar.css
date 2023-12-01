@@ -57,6 +57,31 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
+.logout-btn{
+    background-color: rgba(0, 0, 0, 0);
+    width: 100%;
+    border: none;
+    display: flex;
+    text-decoration: none;
+}
+.logout-btn .icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 60px;
+    height: 60px;
+    font-size: 1.5em;
+    color: #333;
+}
+.logout-btn .text {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
 .logo{
     display: flex;
     text-decoration: none;

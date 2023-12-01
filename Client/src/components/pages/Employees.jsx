@@ -2,6 +2,7 @@ import Modal from 'react-modal';
 import { useState } from 'react';
 import { UserTable } from "../UserTable";
 import "./employees.css";
+import { useSignup } from '../../hooks/useSignup';
 
 export const Employees = () => {
   const [open, setOpen ] = useState(false);
@@ -10,6 +11,8 @@ export const Employees = () => {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [isChecked, setIsChecked] = useState(false);
+
+  const { signup, signuprole, error, clearError } = useSignup();
 
   const handleCheckboxChange = (e) => {
     const checked = e.target.checked;
@@ -21,19 +24,23 @@ export const Employees = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    setOpen(false);
+    // setOpen(false);
     if(isChecked)
     {
-      console.log(username, email, password, role);
+      await signuprole(username, email, password, role);
     }
     else {
-      console.log(username, email, password);
+      await signup(username, email, password);
     }
+    // console.log(error);
     setUsername('');
     setEmail('');
     setPassword('');
     setRole('');
     setIsChecked(false);
+    setTimeout(() => {
+      clearError();
+    },1500);
   }
   Modal.setAppElement('#root');
   return (
@@ -43,7 +50,7 @@ export const Employees = () => {
       <Modal isOpen={open} onRequestClose={() => setOpen(false)} style={{
         content:{
           margin: 'auto',
-          height: '400px',
+          height: '450px',
           width: '450px'
         }
       }}>
@@ -75,6 +82,7 @@ export const Employees = () => {
             checked={isChecked}
             onChange={handleCheckboxChange}
           /><span className='checkboxMsg'>Assign as Admin</span></div>
+           <div className={`error ${error ? '' : 'hidden'}`}>{error}</div>
           <button className='sign-submit-btn'>Submit</button>
         </form>        
       </Modal>
