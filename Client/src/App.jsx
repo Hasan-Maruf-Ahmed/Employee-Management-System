@@ -4,7 +4,7 @@ import { AdminPage } from "./components/pages/AdminPage";
 import { DashBoard } from "./components/pages/DashBoard";
 import { Login } from "./components/pages/Login";
 import { PageNotFound } from "./components/pages/PageNotFound";
-import { Employees } from "./components/Employees";
+import { Employees } from "./components/pages/Employees";
 
 function App() {
   return (
