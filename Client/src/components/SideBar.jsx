@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-import user from "../../public/images/IMG_20230312_134619.jpg";
+import user from "../assets/IMG_20230312_134619.jpg";
 import "./sidebar.css";
 
 export const SideBar = () => {
