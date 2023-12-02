@@ -3,6 +3,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { useFetchAll } from "../hooks/useFetchAll";
 import { Link } from "react-router-dom";
 import "./userTable.css";
+import Modal from 'react-modal';
 
 export const UserTable = () => {
   const { user } = useAuthContext();
@@ -69,6 +70,7 @@ export const UserTable = () => {
           <th>Phone</th>
           <th>Skills</th>
           <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -87,6 +89,8 @@ export const UserTable = () => {
               <td>{user.userDetails?.phone}</td>
               <td>{user.userDetails?.skills?.join(", ")}</td>
               <td><button onClick={() => handleDelete(user._id)}>Delete</button></td>
+              <td><Link to={`/adminpage/employees/update/${user.userDetails?._id}`}>Edit</Link></td>
+              
             </tr>
           );
         })}

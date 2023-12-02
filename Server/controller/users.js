@@ -4,17 +4,32 @@ const User = require('../models/User');
 //get all user details
 const getDetails = async (req, res) => {
     try {
-        const allEmployees = await User.find().select("-password -__v").populate("userDetails", "-_id -__v");
+        const allEmployees = await User.find().select("-password -__v").populate("userDetails", "-__v");
         res.status(200).json(allEmployees);
     } catch (err) {
         res.status(500).send({ message: 'Internal Server Error', error: err.message });
     }
 }
-//get by ID
+//get by user ID
+const getUserById = async (req, res) => {
+    try {
+        // const employee = await UserDetails.findById(req.params.id);
+        const employee = await User.findById(req.params.id).select("-password -__v").populate("userDetails");
+
+        if(!employee) {
+            return res.status(404).send({ message: 'Employee not found' });
+        }
+        res.status(200).json(employee);
+    } catch (err) {
+        res.status(500).send({ message: 'Internal Server Error', error: err.message });
+    } 
+}
+
+//get by userdetails ID
 const getDetailsById = async (req, res) => {
     try {
         // const employee = await UserDetails.findById(req.params.id);
-        const employee = await User.findById(req.params.id).select("-password -__v").populate("userDetails", "-_id");
+        const employee = await UserDetails.findById(req.params.id);
 
         if(!employee) {
             return res.status(404).send({ message: 'Employee not found' });
@@ -86,4 +101,4 @@ const deleteUser = async (req, res) => {
 };
 
 
-module.exports = { getDetails, getDetailsById, addDetails, updateDetails, deleteUser };
+module.exports = { getDetails, getDetailsById, getUserById, addDetails, updateDetails, deleteUser };

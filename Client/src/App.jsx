@@ -7,6 +7,7 @@ import { PageNotFound } from "./components/pages/PageNotFound";
 import { Employees } from "./components/pages/Employees";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { UserDetails } from "./components/pages/UserDetails";
+import { UpdatePage } from "./components/pages/UpdatePage";
 
 function App() {
   const { user } = useAuthContext();
@@ -18,6 +19,7 @@ function App() {
           <Route path="dashboard" element={<DashBoard />} />
           <Route path="employees" element={<Employees />} />
           <Route path="employees/users/:id" element={<UserDetails />} />
+          <Route path="employees/update/:id" element={<UpdatePage />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>
