@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { UserTable } from "../UserTable";
 import "./employees.css";
 import { useSignup } from '../../hooks/useSignup';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 export const Employees = () => {
   const [open, setOpen ] = useState(false);
@@ -11,6 +12,8 @@ export const Employees = () => {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [isChecked, setIsChecked] = useState(false);
+
+  const { user } = useAuthContext();
 
   const { signup, signuprole, error, clearError } = useSignup();
 
@@ -46,7 +49,7 @@ export const Employees = () => {
   return (
     <div className="table-container">
       <UserTable />
-      <button className="signUp" onClick={() => setOpen(true)}>Add Employee</button>
+      <button className="signUp" disabled={(!user) ? true : false} onClick={() => setOpen(true)}>Add Employee</button>
       <Modal isOpen={open} onRequestClose={() => setOpen(false)} style={{
         content:{
           margin: 'auto',
