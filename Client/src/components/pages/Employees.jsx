@@ -4,6 +4,8 @@ import { UserTable } from "../UserTable";
 import "./employees.css";
 import { useSignup } from '../../hooks/useSignup';
 import { useAuthContext } from '../../hooks/useAuthContext';
+// import { Outlet } from "react-router-dom";
+
 
 export const Employees = () => {
   const [open, setOpen ] = useState(false);

@@ -4,7 +4,7 @@ const User = require('../models/User');
 //get all user details
 const getDetails = async (req, res) => {
     try {
-        const allEmployees = await User.find().populate("userDetails", "-_id -__v");
+        const allEmployees = await User.find().select("-password -__v").populate("userDetails", "-_id -__v");
         res.status(200).json(allEmployees);
     } catch (err) {
         res.status(500).send({ message: 'Internal Server Error', error: err.message });
