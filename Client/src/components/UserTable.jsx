@@ -1,29 +1,52 @@
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useFetchAll } from "../hooks/useFetchAll";
 import { Link } from "react-router-dom";
 import "./userTable.css";
 
 export const UserTable = () => {
   const { user } = useAuthContext();
-  const [userData, setUserData] = useState([]);
-  const fetchUsers = async () => {
+  const { userData, fetchUsers } = useFetchAll();
+  // const [userData, setUserData] = useState([]);
+
+  // const fetchUsers = async () => {
+  //   try {
+  //     const response = await fetch("http://localhost:8080/api/getAll", {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: user.token,
+  //       },
+  //     });
+  //     const data = await response.json();
+  //     if (data.length > 0) {
+  //       setUserData(data);
+  //     }
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
+  const handleDelete = async (id) => {
     try {
-      const response = await fetch("http://localhost:8080/api/getAll", {
-        method: "GET",
+      const deleteResponse = await fetch(`http://localhost:8080/api/admin/${id}`, {
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           Authorization: user.token,
         },
       });
-      const data = await response.json();
-      if (data.length > 0) {
-        setUserData(data);
+
+      if (deleteResponse.ok){
+        fetchUsers();
+      }else {
+        console.log("Delete operation failed.")
       }
-      console.log(data);
     } catch (error) {
       console.error(error);
     }
-  };
+  }
 
   useEffect(() => {
     fetchUsers();
@@ -45,6 +68,7 @@ export const UserTable = () => {
           <th>Address</th>
           <th>Phone</th>
           <th>Skills</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -62,6 +86,7 @@ export const UserTable = () => {
               <td>{user.userDetails?.address}</td>
               <td>{user.userDetails?.phone}</td>
               <td>{user.userDetails?.skills?.join(", ")}</td>
+              <td><button onClick={() => handleDelete(user._id)}>Delete</button></td>
             </tr>
           );
         })}

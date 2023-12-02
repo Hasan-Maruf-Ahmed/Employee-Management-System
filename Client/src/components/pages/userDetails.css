@@ -1,0 +1,18 @@
+.user-details {
+    /* border: 1px solid red; */
+    margin: 40px;
+    padding: 5px;
+}
+.user-details h2 {
+    margin: 14px 0;
+    color: #009e89e5;
+}
+.user-details p {
+    color: gray;
+    font-size: 1.05em;
+    padding-left: 15px;
+}
+.user-details p span {
+    color: black;
+    font-size: 1.15em;
+}

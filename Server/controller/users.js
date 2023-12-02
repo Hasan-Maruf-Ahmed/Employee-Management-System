@@ -14,7 +14,7 @@ const getDetails = async (req, res) => {
 const getDetailsById = async (req, res) => {
     try {
         // const employee = await UserDetails.findById(req.params.id);
-        const employee = await UserDetails.findOne({ id: req.params.id }).populate("user", "username email role -_id");
+        const employee = await User.findById(req.params.id).select("-password -__v").populate("userDetails", "-_id");
 
         if(!employee) {
             return res.status(404).send({ message: 'Employee not found' });
@@ -69,9 +69,9 @@ const deleteUser = async (req, res) => {
         }
 
         // Check if user details are populated
-        if (!deletedEmployee.userDetails) {
-            return res.status(404).send({ message: 'User details not found for the employee' });
-        }
+        // if (!deletedEmployee.userDetails) {
+        //     return res.status(404).send({ message: 'User details not found for the employee' });
+        // }
 
         // Delete the associated UserDetails
         await UserDetails.findByIdAndDelete(deletedEmployee.userDetails);

@@ -4,6 +4,7 @@ import { UserTable } from "../UserTable";
 import "./employees.css";
 import { useSignup } from '../../hooks/useSignup';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import { useFetchAll } from '../../hooks/useFetchAll';
 // import { Outlet } from "react-router-dom";
 
 
@@ -14,6 +15,7 @@ export const Employees = () => {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [isChecked, setIsChecked] = useState(false);
+  const { fetchUsers } = useFetchAll();
 
   const { user } = useAuthContext();
 
@@ -38,6 +40,7 @@ export const Employees = () => {
       await signup(username, email, password);
     }
     // console.log(error);
+    fetchUsers();
     setUsername('');
     setEmail('');
     setPassword('');
