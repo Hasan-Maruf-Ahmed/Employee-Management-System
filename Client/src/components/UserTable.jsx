@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useFetchAll } from "../hooks/useFetchAll";
 import { Link } from "react-router-dom";
 import "./userTable.css";
-import Modal from 'react-modal';
 
 export const UserTable = () => {
   const { user } = useAuthContext();
@@ -52,9 +51,10 @@ export const UserTable = () => {
   useEffect(() => {
     fetchUsers();
     console.log("useEffect in UserTable");
-  }, [fetchUsers]);
+  }, []);
 
   return (
+    <div className="table-container">
     <table className="content-table">
       <thead>
         <tr>
@@ -78,7 +78,7 @@ export const UserTable = () => {
           return (
             <tr key={user._id}>
               <td><Link to={`/adminpage/employees/users/${user._id}`}>{user.userDetails?.id}</Link></td>
-              <td>{`${user.userDetails?.firstname} ${user.userDetails?.lastname}`}</td>
+              <td>{`${user.userDetails?.firstname ? user.userDetails?.firstname : ''} ${user.userDetails?.lastname ? user.userDetails?.lastname : ''}`}</td>
               <td>{user.email}</td>
               <td>{user.userDetails?.age}</td>
               <td>{user.role}</td>
@@ -88,13 +88,14 @@ export const UserTable = () => {
               <td>{user.userDetails?.address}</td>
               <td>{user.userDetails?.phone}</td>
               <td>{user.userDetails?.skills?.join(", ")}</td>
-              <td><button onClick={() => handleDelete(user._id)}>Delete</button></td>
-              <td><Link to={`/adminpage/employees/update/${user.userDetails?._id}`}>Edit</Link></td>
+              <td><button className="del-btn" onClick={() => handleDelete(user._id)}>Delete</button></td>
+              <td><div className="edit-btn"><Link to={`/adminpage/employees/update/${user.userDetails?._id}`}>Edit</Link></div></td>
               
             </tr>
           );
         })}
       </tbody>
     </table>
+    </div>
   );
 };
