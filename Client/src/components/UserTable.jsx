@@ -52,7 +52,7 @@ export const UserTable = () => {
   useEffect(() => {
     fetchUsers();
     console.log("useEffect in UserTable");
-  }, []);
+  }, [fetchUsers]);
 
   return (
     <table className="content-table">

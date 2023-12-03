@@ -8,6 +8,7 @@ import { Employees } from "./components/pages/Employees";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { UserDetails } from "./components/pages/UserDetails";
 import { UpdatePage } from "./components/pages/UpdatePage";
+import { UserPage } from "./components/pages/UserPage";
 
 function App() {
   const { user } = useAuthContext();
@@ -15,6 +16,7 @@ function App() {
     <div className="app">
       <Routes>
         <Route path="/" element={!user ? <Login /> : <Navigate to="/adminpage/dashboard"/>} />
+        <Route path="userpage" element={<UserPage/>} />
         <Route path="adminpage" element={user ? <AdminPage /> : <Navigate to="/"/>}>
           <Route path="dashboard" element={<DashBoard />} />
           <Route path="employees" element={<Employees />} />

@@ -59,7 +59,7 @@ export const SideBar = () => {
           </div>
           <div className="bottom">
             <li>
-              <NavLink>
+              <NavLink to="/userpage">
                 <span className="icon">
                   <div className="imgBx">
                     <img src={userdp} alt="" />

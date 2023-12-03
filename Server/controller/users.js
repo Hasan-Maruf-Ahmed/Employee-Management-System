@@ -59,8 +59,8 @@ const addDetails = async (req, res) => {
 //update by ID
 const updateDetails = async (req, res) => {
     try {
-        const updatedEmployee = await UserDetails.findOneAndUpdate(
-            { id: req.params.id},
+        const updatedEmployee = await UserDetails.findByIdAndUpdate(
+            req.params.id,
             req.body,
             { new: true }
             );
