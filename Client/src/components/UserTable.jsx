@@ -77,7 +77,7 @@ export const UserTable = () => {
         {userData.map((user) => {
           return (
             <tr key={user._id}>
-              <td><Link to={`/adminpage/employees/users/${user._id}`}>{user.userDetails?.id}</Link></td>
+              <td><Link to={`/adminpage/employees/users/${user._id}`}>{user.userDetails?.empid}</Link></td>
               <td>{`${user.userDetails?.firstname ? user.userDetails?.firstname : ''} ${user.userDetails?.lastname ? user.userDetails?.lastname : ''}`}</td>
               <td>{user.email}</td>
               <td>{user.userDetails?.age}</td>

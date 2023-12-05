@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const auth = require('../middleware/auth');
 const roleCheck = require('../middleware/roleCheck');
 
-router.post('/', auth, roleCheck(['admin']), async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const { error } = validate(req.body);
         if (error) {
@@ -26,3 +26,4 @@ router.post('/', auth, roleCheck(['admin']), async (req, res) => {
 })
 
 module.exports = router;
+// , auth, roleCheck(['admin'])

@@ -1,8 +1,8 @@
 .login-container {
     height: 100vh;
-    /* display: flex;
+    display: flex;
     justify-content: center;
-    align-items: center; */
+    align-items: center;
 }
 
 .loginbox{
@@ -56,4 +56,8 @@
   height: 50px;
   opacity: 0; /* Set opacity to 0 to hide the error */
   transition: opacity 0.5s ease; /* Apply the same transition for hiding */
+}
+
+.btn-hidden {
+  opacity: 0;
 }

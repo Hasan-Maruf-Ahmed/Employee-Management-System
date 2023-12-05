@@ -7,9 +7,8 @@ const userDetailsSchema = new Schema({
         type: mongoose.Types.ObjectId,
         ref: 'User'
     },
-    id: {
+    empid: {
         type: String,
-        required: true,
         unique: true
     },
     firstname: {
@@ -31,7 +30,7 @@ const userDetailsSchema = new Schema({
     phone: {
         type: String,
         required: true,
-        unique: true,
+        // unique: true,
     },
     address: {
         type: String,
@@ -47,7 +46,7 @@ const userDetailsSchema = new Schema({
     },
     salary: {
         type: Number,
-        required: true,
+        // required: true,
     },
     skills: [{
         type: String,

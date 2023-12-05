@@ -177,7 +177,7 @@ export const UpdatePage = () => {
           <input
             className="updateInput"
             type="text"
-            placeholder="Enter your salary"
+            placeholder="Enter Salary"
             value={values.salary}
             onChange={(e) => setValues({ ...values, salary: e.target.value })}
           />

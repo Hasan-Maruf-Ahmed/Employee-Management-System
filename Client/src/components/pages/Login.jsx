@@ -20,13 +20,6 @@ export const Login = () => {
   }
   return (
     <div className='login-container'>
-      <p>Login page</p>
-      <button>
-        <Link to="/adminpage">Adminpage</Link>
-      </button>
-      <button>
-        <Link to="/adminpage/dashboard">Dashboard</Link>
-      </button>
       <div className="loginbox">
       <form className='loginForm' onSubmit={handleSubmit}>
           <label className='loginLabel'>Email:</label>
