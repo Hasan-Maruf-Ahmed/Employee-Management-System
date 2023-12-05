@@ -5,6 +5,7 @@ import "./employees.css";
 import { useSignup } from '../../hooks/useSignup';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useFetchAll } from '../../hooks/useFetchAll';
+import { useNavigate } from 'react-router-dom';
 // import { Outlet } from "react-router-dom";
 
 
@@ -18,6 +19,7 @@ export const Employees = () => {
   const { fetchUsers } = useFetchAll();
 
   const { user } = useAuthContext();
+  const navigate = useNavigate();
 
   const { signup, signuprole, error, clearError } = useSignup();
 
@@ -46,6 +48,11 @@ export const Employees = () => {
     setPassword('');
     setRole('');
     setIsChecked(false);
+    if(!error)
+    {
+      navigate('/adminpage/employees');
+      console.log('')
+    }
     setTimeout(() => {
       clearError();
     },1500);

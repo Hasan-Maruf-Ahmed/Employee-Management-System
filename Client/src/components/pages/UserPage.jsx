@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom"
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useEffect, useState } from "react";
+import { useLogout } from "../../hooks/useLogout";
 import './userpage.css';
 
 export const UserPage = () => {
@@ -90,8 +91,15 @@ export const UserPage = () => {
     e.preventDefault();
     Navigate(`adddetails/${id}`);
   }
+  const { logout } = useLogout();
+  // const { user }= useAuthContext();
+  const handleLogout = () => {
+    logout();
+  }
 
   return (
+    <div className="container">
+      <button className="user-logout-btn" onClick={handleLogout}>Logout</button>
     <div className="user-container">
       <div className="userbox">
         <form className="userForm" onSubmit={handleClick}>
@@ -230,6 +238,7 @@ export const UserPage = () => {
           <button className={`user-submit-btn ${!isDetailsExist ? '' : 'btn-hidden'}`} disabled={isDetailsExist}>Add Details</button>
         </form>
       </div>
+    </div>
     </div>
   )
 }

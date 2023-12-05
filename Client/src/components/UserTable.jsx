@@ -89,7 +89,7 @@ export const UserTable = () => {
               <td>{user.userDetails?.phone}</td>
               <td>{user.userDetails?.skills?.join(", ")}</td>
               <td><button className="del-btn" onClick={() => handleDelete(user._id)}>Delete</button></td>
-              <td><div className="edit-btn"><Link to={`/adminpage/employees/update/${user.userDetails?._id}`}>Edit</Link></div></td>
+              <td>{user.userDetails?.empid ? <div className="edit-btn"><Link to={`/adminpage/employees/update/${user.userDetails?._id}`}>Edit</Link></div> : ''}</td>
               
             </tr>
           );

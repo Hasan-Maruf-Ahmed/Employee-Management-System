@@ -13,11 +13,12 @@ import { AddDetailsPage } from "./components/pages/AddDetailsPage";
 
 function App() {
   const { user } = useAuthContext();
+  
   return (
     <div className="app">
       <Routes>
         <Route path="/" element={!user ? <Login /> : <Navigate to="/adminpage/dashboard"/>} />
-        <Route path="userpage/:id" element={<UserPage/>} />
+        <Route path="userpage/:id" element={user ? <UserPage/> : <Navigate to="/"/>} />
         <Route path="userpage/:id/adddetails/:id" element={<AddDetailsPage />} />
         <Route path="adminpage" element={user ? <AdminPage /> : <Navigate to="/"/>}>
           <Route path="dashboard" element={<DashBoard />} />

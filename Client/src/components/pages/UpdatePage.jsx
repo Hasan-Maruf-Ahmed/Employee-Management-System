@@ -17,6 +17,7 @@ export const UpdatePage = () => {
     department: "",
     salary: "",
     skills: "",
+    empid: ""
   });
   // const history = useHistory();
   const navigate = useNavigate();
@@ -51,6 +52,7 @@ export const UpdatePage = () => {
           department: data.department,
           salary: data.salary,
           skills: data.skills.join(", "),
+          empid: data.empid,
         });
         //   console.log(data.age);
       } catch (error) {
@@ -173,6 +175,14 @@ export const UpdatePage = () => {
               />
             </div>
           </div>
+          <label className="updateLabel">Employee ID:</label>
+          <input
+            className="updateInput"
+            type="text"
+            placeholder="Enter Employee ID"
+            value={values.empid}
+            onChange={(e) => setValues({ ...values, empid: e.target.value })}
+          />
           <label className="updateLabel">Salary:</label>
           <input
             className="updateInput"
